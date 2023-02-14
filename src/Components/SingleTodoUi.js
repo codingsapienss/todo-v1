@@ -88,7 +88,7 @@ export default function SingleTodoUi() {
             {todos.map((y, index) => {
               return (
                 <li>
-                  <span key="y.id">{`${index}. ${y.todo}`}</span>
+                  <span key="y.id">{`${index+1}. ${y.todo}`}</span>
                   <button onClick={() => {handleEdit(y.id)}}>Edit </button>
                   <button onClick={() => handleDelete(y.id)}> Delete</button>
                 </li> );
