@@ -1,14 +1,27 @@
 import React from "react";
 import "./SingleTodoUi.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+
+
+const getLocalItems =()=>{
+  let list = localStorage.getItem("lists")
+  if(list) {
+   return JSON.parse(localStorage.getItem("lists"))
+  }else{
+    return[]
+  }
+}
 
 export default function SingleTodoUi() {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(getLocalItems());
   const [editId, seteditId] = useState(0)
 
 //   localStorage.setItem("todo", JSON.stringify([...todos]));
 
+
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(editId) {
@@ -38,13 +51,18 @@ export default function SingleTodoUi() {
 
     setTodos([...deletedItem]);
     
-  };
+  }
 
   const handleEdit = (id) => {
         let editItem = todos.find((y)=>{ return y.id === id})
         setTodo(editItem.todo)
         seteditId(editItem.id)
   };
+
+  useEffect(() => {
+    localStorage.setItem("lists" , JSON.stringify(todos)) 
+  }, [todos])
+  
 
   return (
     <div>
@@ -55,7 +73,7 @@ export default function SingleTodoUi() {
               type="text"
               name="inputTxt"
               value={todo}
-              placeholder="Add your todo..."
+              placeholder="💭 Add your todo..."
               onChange={(e) => {
                 setTodo(e.target.value);
                 // console.log(todo);
@@ -67,10 +85,10 @@ export default function SingleTodoUi() {
         </div>
         <div className="todo-list">
           <ul>
-            {todos.map((y) => {
+            {todos.map((y, index) => {
               return (
                 <li>
-                  <span key="y.id">{y.todo}</span>
+                  <span key="y.id">{`${index}. ${y.todo}`}</span>
                   <button onClick={() => {handleEdit(y.id)}}>Edit </button>
                   <button onClick={() => handleDelete(y.id)}> Delete</button>
                 </li> );
