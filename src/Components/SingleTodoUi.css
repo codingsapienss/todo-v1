@@ -87,7 +87,8 @@ form button:hover{
 
 .todo-list li span {
   flex: 1;
-  padding:0 1em;
+  padding:5px 1em;
+  color:   #E7EEFB;
 }
 
 .todo-list button {
@@ -103,4 +104,19 @@ form button:hover{
     background-color: #7a8aa7;
     color:#432344;
     cursor: pointer;
+}
+
+@media (max-width: 600px){
+    .todo-list button{
+        font-size: .4rem;
+        
+    }
+
+    .todo-list li {
+        font-size: .5rem;
+    }
+
+    .todo-list li span {
+        padding:5px 2px;
+      }
 }
