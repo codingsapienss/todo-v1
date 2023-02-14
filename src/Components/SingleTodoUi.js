@@ -15,24 +15,18 @@ export default function SingleTodoUi() {
       let editedItem = todos.find((i)=>{
           return i.id === editId
       })
-
       let updatedTodo = todos.map ((x)=>{
        return x.id === editedItem.id ? x = {id : x.id, todo}  : x= {id :x.id , todo : x.todo}
       })
-
       setTodos(updatedTodo)
       seteditId(0);
       setTodo("")
       return;
     }
-
-
     if (todo !== "") {
-      setTodos([{ id: `${todo}-${Date.now()}`, todo }, ...todos]);
+      setTodos([...todos, { id: `${todo}-${Date.now()}`, todo }]);
       // console.log(todos);
       setTodo("");
-
-
     }
   };
 
