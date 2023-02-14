@@ -69,7 +69,7 @@ form button:hover{
 }
 
 .todo-list li  {
-    width: 95%;
+    width: 100%;
     min-height: 2.5em;
     background-color: #ff2525;
     margin:  1em 0;
@@ -116,7 +116,7 @@ form button:hover{
         font-size: 1rem;
     }
 
-    .todo-list li span {
+    .todo-list span {
         padding:5px 8px;
       }
 }
