@@ -1,6 +1,21 @@
 
 Netlify Deployed link - https://todoapp-v1-imprsant.netlify.app/
 
+This is a simple todo progressive web app made in react. I have used loacal-storage so your added todos will not get erased untill you delete them or clear the cache of your browser.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
