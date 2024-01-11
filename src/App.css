@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  padding: 1.5rem;
+  min-height: 100vh;
+  background-color: var(--bgc_Color);
+}
