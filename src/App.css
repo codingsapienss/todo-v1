@@ -5,7 +5,8 @@
 }
 
 .App {
-  padding: 1rem 10px;
+  /* padding: 1rem 10px; */
   min-height: 100vh;
   background-color: var(--bgc_Color);
+  overflow-y: hidden;
 }
