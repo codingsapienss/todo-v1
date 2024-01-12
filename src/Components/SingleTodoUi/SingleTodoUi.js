@@ -93,6 +93,7 @@ export default function SingleTodoUi() {
       <div className="input">
         <form onSubmit={handleSubmit}>
           <input
+            autoFocus
             type="text"
             name="inputTxt"
             value={todo}
@@ -114,7 +115,6 @@ export default function SingleTodoUi() {
             return (
               <li className={y.checked ? "checked" : ""} key={y.id}>
                 <input
-                  autoFocus
                   checked={y.checked}
                   onChange={() => {
                     handleCheck(y.id);
