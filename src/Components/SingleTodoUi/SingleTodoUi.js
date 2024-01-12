@@ -28,6 +28,15 @@ export default function SingleTodoUi() {
       let editedItem = todos.find((i) => {
         return i.id === editId;
       });
+
+      if (!editedItem) {
+        seteditId(0);
+        setTodos([
+          ...todos,
+          { id: `${todo}-${Date.now()}`, todo, checked: false },
+        ]);
+        setTodo("");
+      }
       let updatedTodo = todos.map((x) => {
         return x.id === editedItem.id
           ? (x = { id: x.id, todo })
@@ -53,7 +62,6 @@ export default function SingleTodoUi() {
     let deletedItem = todos.filter((x) => {
       return x.id !== id;
     });
-
     setTodos([...deletedItem]);
   };
 
@@ -63,6 +71,17 @@ export default function SingleTodoUi() {
     });
     setTodo(editItem.todo);
     seteditId(editItem.id);
+  };
+
+  const handleCheck = (id) => {
+    let checkedItem = todos.find((todo) => todo.id === id);
+    let updatedTodo = todos.map((todo) => {
+      return todo.id === checkedItem.id
+        ? (todo = { ...todo, checked: !todo.checked })
+        : (todo = { ...todo });
+    });
+
+    setTodos(updatedTodo);
   };
 
   useEffect(() => {
@@ -93,7 +112,17 @@ export default function SingleTodoUi() {
         <ul>
           {todos.map((y, index) => {
             return (
-              <li key={y.id}>
+              <li className={y.checked ? "checked" : ""} key={y.id}>
+                <input
+                  autoFocus
+                  checked={y.checked}
+                  onChange={() => {
+                    handleCheck(y.id);
+                  }}
+                  id="checkbox"
+                  type="checkbox"
+                />
+
                 <span>{`${index + 1}. ${y.todo}`}</span>
                 <FaEdit
                   className="editBtn btn"
