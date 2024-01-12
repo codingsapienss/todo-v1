@@ -39,7 +39,10 @@ export default function SingleTodoUi() {
       return;
     }
     if (todo !== "") {
-      setTodos([...todos, { id: `${todo}-${Date.now()}`, todo }]);
+      setTodos([
+        ...todos,
+        { id: `${todo}-${Date.now()}`, todo, checked: false },
+      ]);
       // console.log(todos);
       setTodo("");
     }
