@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import SingleTodoUi from "./Components/SingleTodoUi/SingleTodoUi";
-// import MainPageUI from "./Components/MainPageUI/MainPageUI";
+import SingleTodoUi from "./Components/SingleTodoUi";
+// import MainPageUI from "./Components/MainPageUI";
 
 function App() {
   return (

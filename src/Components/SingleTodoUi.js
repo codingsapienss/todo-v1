@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
-import "./SingleTodoUi.css";
-import "../../Global.css";
+import "./Style.css";
+import "../Global.css";
 import { FaPlus, FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-
 import { useState, useEffect } from "react";
 
 const getLocalItems = () => {
@@ -71,6 +70,7 @@ export default function SingleTodoUi() {
     let editItem = todos.find((y) => {
       return y.id === id;
     });
+
     setTodo(editItem.todo);
     seteditId(editItem.id);
   };
@@ -142,6 +142,7 @@ export default function SingleTodoUi() {
                   className="editBtn btn"
                   onClick={() => {
                     handleEdit(y.id);
+                    inputRef.current.focus();
                   }}
                 />
                 <MdDeleteOutline
