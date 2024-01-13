@@ -148,6 +148,10 @@ form button:hover {
   padding: 10px 20px;
 }
 
+#singleList {
+  cursor: pointer;
+}
+
 #title {
   font-size: 1.5rem;
 }

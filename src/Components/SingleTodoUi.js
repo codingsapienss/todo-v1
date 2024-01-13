@@ -105,7 +105,6 @@ export default function SingleTodoUi() {
             placeholder="Add Items..."
             onChange={(e) => {
               setTodo(e.target.value);
-              // console.log(todo);
             }}
           />
           <button

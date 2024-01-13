@@ -3,51 +3,7 @@ import { FaEdit } from "react-icons/fa";
 
 const lists = [
   {
-    id: 0,
-    title: "The first",
-  },
-  {
-    id: 1,
-    title: "The first",
-  },
-  {
-    id: 2,
-    title: "The first",
-  },
-  {
-    id: 3,
-    title: "The first",
-  },
-  {
-    id: 0,
-    title: "The first",
-  },
-  {
-    id: 1,
-    title: "The first",
-  },
-  {
-    id: 2,
-    title: "The first",
-  },
-  {
-    id: 3,
-    title: "The first",
-  },
-  {
-    id: 0,
-    title: "The first",
-  },
-  {
-    id: 1,
-    title: "The first",
-  },
-  {
-    id: 2,
-    title: "The first",
-  },
-  {
-    id: 3,
+    id: Date.now(),
     title: "The first",
   },
 ];
@@ -60,20 +16,20 @@ const MainPageUI = () => {
       <div className="notesLists">
         {lists.map((li, i) => {
           return (
-            <ul key={i}>
+            <ul id="singleList" key={i}>
               <li>
                 <span id="title">
                   {i + 1}. {li.title}
                 </span>
+
                 <span id="date">
-                  -{" "}
-                  {new Date(Date.now()).toLocaleString("en-US", {
+                  -
+                  {new Date(li.id).toLocaleString("en-US", {
                     month: "long",
                     day: "2-digit",
                     year: "numeric",
                     hour: "2-digit",
                     minute: "2-digit",
-                    // second: "2-digit",
                   })}
                 </span>
               </li>
