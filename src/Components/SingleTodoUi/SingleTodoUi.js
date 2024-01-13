@@ -91,11 +91,13 @@ export default function SingleTodoUi() {
   }, [todos]);
 
   return (
-    <div className="container ">
+    <div className="container">
       <div className="input">
         <form onSubmit={handleSubmit}>
           <input
             autoFocus
+            required
+            autoComplete="off"
             type="text"
             ref={inputRef}
             name="inputTxt"
