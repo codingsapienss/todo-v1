@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./SingleTodoUi.css";
 import "../../Global.css";
 import { FaPlus, FaEdit } from "react-icons/fa";
@@ -19,6 +19,8 @@ export default function SingleTodoUi() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState(getLocalItems());
   const [editId, seteditId] = useState(0);
+
+  const inputRef = useRef();
 
   //   localStorage.setItem("todo", JSON.stringify([...todos]));
 
@@ -95,6 +97,7 @@ export default function SingleTodoUi() {
           <input
             autoFocus
             type="text"
+            ref={inputRef}
             name="inputTxt"
             value={todo}
             placeholder="Add Items..."
@@ -103,7 +106,16 @@ export default function SingleTodoUi() {
               // console.log(todo);
             }}
           />
-          <button type="submit"> {editId ? <FaEdit /> : <FaPlus />}</button>
+          <button
+            onClick={() => {
+              inputRef.current.focus();
+            }}
+            aria-label="Add"
+            type="submit"
+          >
+            {" "}
+            {editId ? <FaEdit /> : <FaPlus />}
+          </button>
         </form>
 
         <hr />
