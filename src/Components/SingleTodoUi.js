@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 import React, { useRef } from "react";
 import "./Style.css";
 import "../Global.css";
@@ -9,140 +8,122 @@ import { useParams } from "react-router-dom";
 
 export default function SingleTodoUi() {
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem("Lists")) || []
+  const [allTodoData, setAllTodoData] = useState(
+    JSON.parse(localStorage.getItem("todoListData")) || []
   );
-  const [editId, seteditId] = useState(0);
+  const [editId, setEditId] = useState(0);
 
   const inputRef = useRef();
   const { id } = useParams();
 
-  console.log("id", id); //   localStorage.setItem("todo", JSON.stringify([...todos]));
-
-  const selectedList = todos?.find((t) => {
-    return t.id == id;
+  const selectedTodoList = allTodoData?.find((singleList) => {
+    return parseInt(singleList.id) === parseInt(id);
   });
-  console.log("selectedList", selectedList);
-  console.log("todos", todos);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editId) {
-      let editedItem = selectedList.list.find((i) => {
-        return i.id == editId;
+      let selectedTodo = selectedTodoList.list.find((singleTodo) => {
+        return parseInt(singleTodo.id) === parseInt(editId);
       });
 
-      console.log(editedItem);
-
-      if (!editedItem) {
-        console.log("clicked when deleted");
-        let updatedTodo = todos.map((t) => {
-          console.log(t.id == id);
-          // console.log(t);
-          return t.id == id
-            ? (t = {
-                ...t,
+      if (!selectedTodo) {
+        let updatedTodoData = allTodoData.map((singleList) => {
+          return parseInt(singleList.id) === parseInt(id)
+            ? (singleList = {
+                ...singleList,
                 list: [
-                  ...t.list,
+                  ...singleList.list,
                   { id: Date.now(), todo: todo, checked: false },
                 ],
               })
-            : (t = { ...t });
+            : (singleList = { ...singleList });
         });
 
-        console.log(updatedTodo);
-
-        setTodos(updatedTodo);
+        setAllTodoData(updatedTodoData);
         setTodo("");
-        seteditId(0);
-
-        console.log("clicked when deleted2222");
+        setEditId(0);
         return;
       }
 
-      let updatedTodo = todos?.map((t) => {
-        return t.id == id
-          ? (t = {
-              ...t,
-              list: selectedList.list.map((t) => {
-                return t.id == editId
-                  ? (t = { ...t, todo: todo })
-                  : (t = { ...t });
+      let updatedTodoData = allTodoData?.map((singleList) => {
+        return parseInt(singleList.id) === parseInt(id)
+          ? (singleList = {
+              ...singleList,
+              list: selectedTodoList.list.map((singleTodo) => {
+                return parseInt(singleTodo.id) === parseInt(editId)
+                  ? (singleTodo = { ...singleTodo, todo: todo })
+                  : (singleTodo = { ...singleTodo });
               }),
             })
-          : (t = { ...t });
+          : (singleList = { ...singleList });
       });
-      setTodos(updatedTodo);
-      seteditId(0);
+      setAllTodoData(updatedTodoData);
+      setEditId(0);
       setTodo("");
       return;
     }
 
     if (todo !== "") {
-      let updatedTodo = todos?.map((t) => {
-        return t.id == id
-          ? (t = {
-              ...t,
-              list: [...t.list, { id: Date.now(), todo: todo, checked: false }],
+      let updatedTodoData = allTodoData?.map((singleList) => {
+        return parseInt(singleList.id) === parseInt(id)
+          ? (singleList = {
+              ...singleList,
+              list: [
+                ...singleList.list,
+                { id: Date.now(), todo: todo, checked: false },
+              ],
             })
-          : (t = { ...t });
+          : (singleList = { ...singleList });
       });
-
-      // setTodos([
-      //   ...todos,
-      //   { id: `${todo}-${Date.now()}`, todo, checked: false },
-      // ]);
-
-      setTodos(updatedTodo);
-
+      setAllTodoData(updatedTodoData);
       setTodo("");
     }
   };
 
-  // handleSubmit()
   const handleDelete = (selectedId) => {
-    let remainingItems = todos.map((t) => {
-      return t.id == id
-        ? (t = {
-            ...t,
-            list: t.list.filter((t) => parseInt(t.id) !== parseInt(selectedId)),
+    let remainingItems = allTodoData.map((singleList) => {
+      return parseInt(singleList.id) === parseInt(id)
+        ? (singleList = {
+            ...singleList,
+            list: singleList.list.filter(
+              (singleTodo) => parseInt(singleTodo.id) !== parseInt(selectedId)
+            ),
           })
-        : (t = { ...t });
+        : (singleList = { ...singleList });
     });
-    setTodos([...remainingItems]);
+    setAllTodoData([...remainingItems]);
   };
 
   const handleEdit = (selectedId) => {
-    let editItem = todos
-      ?.find((t) => t.id == id)
-      .list.find((t) => t.id == selectedId);
-
-    // console.log(editItem);
+    let editItem = allTodoData
+      ?.find((singleList) => parseInt(singleList.id) === parseInt(id))
+      .list.find(
+        (singleTodo) => parseInt(singleTodo.id) === parseInt(selectedId)
+      );
     setTodo(editItem.todo);
-    seteditId(editItem.id);
+    setEditId(editItem.id);
   };
 
   const handleCheck = (selectedId) => {
-    let checkedItem = selectedList.list.find((todo) => todo.id === id);
-    console.log(checkedItem);
-    let updatedTodo = todos?.map((t) => {
-      return t.id == id
-        ? (t = {
-            ...t,
-            list: selectedList.list.map((t) => {
-              return t.id == selectedId
-                ? (t = { ...t, checked: !t.checked })
-                : (t = { ...t });
+    let updatedTodoData = allTodoData?.map((singleList) => {
+      return parseInt(singleList.id) === parseInt(id)
+        ? (singleList = {
+            ...singleList,
+            list: selectedTodoList.list.map((singleTodo) => {
+              return parseInt(singleTodo.id) === parseInt(selectedId)
+                ? (singleTodo = { ...singleTodo, checked: !singleTodo.checked })
+                : (singleTodo = { ...singleTodo });
             }),
           })
-        : (t = { ...t });
+        : (singleList = { ...singleList });
     });
-    setTodos(updatedTodo);
+    setAllTodoData(updatedTodoData);
   };
 
   useEffect(() => {
-    localStorage.setItem("Lists", JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem("todoListData", JSON.stringify(allTodoData));
+  }, [allTodoData]);
 
   return (
     <div className="container">
@@ -168,7 +149,6 @@ export default function SingleTodoUi() {
             aria-label="Add"
             type="submit"
           >
-            {" "}
             {editId ? <FaEdit /> : <FaPlus />}
           </button>
         </form>
@@ -178,31 +158,33 @@ export default function SingleTodoUi() {
 
       <div className="todo-list">
         <ul>
-          {/* {console.log(selectedList)} */}
-          {selectedList &&
-            selectedList.list?.map((y, index) => {
+          {selectedTodoList &&
+            selectedTodoList.list?.map((singleTodo, index) => {
               return (
-                <li className={y.checked ? "checked" : ""} key={y.id}>
+                <li
+                  className={singleTodo.checked ? "checked" : ""}
+                  key={singleTodo.id}
+                >
                   <input
-                    checked={y.checked}
+                    checked={singleTodo.checked}
                     onChange={() => {
-                      handleCheck(y.id);
+                      handleCheck(singleTodo.id);
                     }}
                     id="checkbox"
                     type="checkbox"
                   />
 
-                  <span>{`${index + 1}. ${y.todo}`}</span>
+                  <span>{`${index + 1}. ${singleTodo.todo}`}</span>
                   <FaEdit
                     className="editBtn btn"
                     onClick={() => {
-                      handleEdit(y.id);
+                      handleEdit(singleTodo.id);
                       inputRef.current.focus();
                     }}
                   />
                   <MdDeleteOutline
                     className="deleteBtn btn"
-                    onClick={() => handleDelete(y.id)}
+                    onClick={() => handleDelete(singleTodo.id)}
                   />
                 </li>
               );
