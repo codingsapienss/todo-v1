@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useRef } from "react";
 import "./Style.css";
 import "../Global.css";

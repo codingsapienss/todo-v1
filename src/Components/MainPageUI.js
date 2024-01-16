@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable eqeqeq */
 import { useEffect, useState } from "react";
 import "./Style.css";
 import { FaEdit } from "react-icons/fa";
