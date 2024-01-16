@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Style.css";
 import { FaEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { MdDeleteOutline } from "react-icons/md";
 
 const MainPageUI = () => {
   const navigate = useNavigate();
@@ -34,11 +33,6 @@ const MainPageUI = () => {
     setNewId(newList.id);
   };
 
-  const handleDelete = (e, selectedId) => {
-    e.stopPropagation();
-    let remainingItems = lists.filter((li) => li.id != selectedId);
-    setLists(remainingItems);
-  };
   return (
     <div className="mainContainer">
       <h1>My Todo</h1>
@@ -58,16 +52,10 @@ const MainPageUI = () => {
         {lists &&
           lists.map((li, i) => {
             return (
-              <ul
-                onClick={() => {
-                  navigate(`/todo/${li.id}`);
-                }}
-                id="singleList"
-                key={i}
-              >
+              <ul id="singleList" key={i}>
                 <li>
                   <span id="title">
-                    {i + 1}. {li.list.length > 0 ? li.list[0].todo : "empty"}
+                    {i + 1}. {li.title}
                   </span>
 
                   <span id="date">
@@ -80,11 +68,6 @@ const MainPageUI = () => {
                       minute: "2-digit",
                     })}
                   </span>
-
-                  <MdDeleteOutline
-                    className="deleteBtn btn"
-                    onClick={(e) => handleDelete(e, li.id)}
-                  />
                 </li>
               </ul>
             );

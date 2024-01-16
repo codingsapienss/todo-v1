@@ -146,13 +146,6 @@ form button:hover {
   align-items: flex-start;
   justify-content: center;
   padding: 10px 20px;
-  position: relative;
-}
-
-.mainContainer li .deleteBtn {
-  position: absolute;
-  right: 0;
-  font-size: 2rem;
 }
 
 #singleList {
@@ -165,7 +158,6 @@ form button:hover {
 
 #date {
   font-size: 0.8rem;
-  margin-right: 30px;
   align-self: flex-end;
 }
 
